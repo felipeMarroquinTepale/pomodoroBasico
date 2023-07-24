@@ -134,7 +134,7 @@ function eliminarTask(id){
 //Comenzar conteo de una tarea
 function startConteo(id){
     //time contendra los segundos de 25 minutos
-    time = 2;
+    time = 25 * 60;
     current = id;
 
     renderTimer();
@@ -176,7 +176,7 @@ function markCompleted(id){
 //Iniciamos el tiempo de descanso
 function startBreak(){
     //el tiempo de descanso sera de 3 minutos
-    time = 3;
+    time = 3 * 60;
     renderTimer();
     alertDiv.classList.add("alert-warning");
     msg_tempo.textContent = "Tiempo de descanso";
