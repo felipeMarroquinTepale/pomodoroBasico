@@ -66,7 +66,6 @@ function renderizarTask(){
                             </div>
 
                             `
-
                             :
 
                             `
@@ -88,7 +87,7 @@ function renderizarTask(){
     const div_tasks = document.querySelector("#tasks");
     div_tasks.innerHTML = html.join('');
 
-
+    //Eventos de todos los botones de deleteTask
     const deleteTask = document.querySelectorAll("#deleteTask");
     deleteTask.forEach(button=>{
         button.addEventListener("click",e => {
@@ -100,6 +99,7 @@ function renderizarTask(){
         })
     })
 
+    //Eventos de todos los botones de iniciar una tarea
     const startButtonTask = document.querySelectorAll("#start-task");
     startButtonTask.forEach(button => {
         button.addEventListener("click", e => {
@@ -117,20 +117,24 @@ function renderizarTask(){
 
 }
 
-
-
+//Eliminar una tarea
 function eliminarTask(id){
     const taskIndex = tasks.findIndex(task => task.id === id);
-    tasks.splice(taskIndex, 1);
-    console.log("tasks: ", tasks )
-    renderizarTask();
+    if(time != 0 ){
+        alert("No se puede eliminar una actividad en progreso...");
+    }else{
+        const taskIndex = tasks.findIndex(task => task.id === id);
+        tasks.splice(taskIndex, 1);
+        console.log("tasks: ", tasks )
+        renderizarTask();
+    }
 }
 
 
-
+//Comenzar conteo de una tarea
 function startConteo(id){
     //time contendra los segundos de 25 minutos
-    time = 25 * 60;
+    time = 2;
     current = id;
 
     renderTimer();
@@ -153,6 +157,7 @@ function startConteo(id){
 }
 
 
+//Renderizamos el temporizador
 function renderTimer(){
     //convertimos los segundos totales de 25 minutos a minutos otra vez
     const minutes = parseInt(time/60);
@@ -162,15 +167,16 @@ function renderTimer(){
 }
 
 
+//Marcamos si la tarea se completo
 function markCompleted(id){
     const taskIndex = tasks.findIndex((task) => task.id === id);
     tasks[taskIndex].isCompleted = true;
 }
 
-
+//Iniciamos el tiempo de descanso
 function startBreak(){
     //el tiempo de descanso sera de 3 minutos
-    time = 3 * 60;
+    time = 3;
     renderTimer();
     alertDiv.classList.add("alert-warning");
     msg_tempo.textContent = "Tiempo de descanso";
